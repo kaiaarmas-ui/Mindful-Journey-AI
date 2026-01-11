@@ -1,0 +1,8 @@
+{
+  "name": "Mindful Journey",
+  "description": "An AI-powered wellness companion for meditation, reflection, and peaceful creation.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ]
+}
