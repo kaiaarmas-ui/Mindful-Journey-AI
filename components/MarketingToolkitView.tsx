@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
@@ -197,7 +198,7 @@ const MarketingToolkitView: React.FC<MarketingToolkitViewProps> = ({ onBack, isM
                   <Rocket size={32} />
                 </div>
                 <div>
-                  <h2 className="text-3xl font-bold text-white tracking-tight">Social Post Architect</h2>
+                  <h2 className="text-3xl font-bold text-white tracking-tight">Social Post Creator</h2>
                   <p className="text-slate-500 font-medium">Ready-to-use captions pointing to www.mindfuljourney.com.</p>
                 </div>
               </div>

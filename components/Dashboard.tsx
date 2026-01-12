@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { motion } from 'framer-motion';
 import { AppView, UserProfile } from '../types';
@@ -23,11 +24,12 @@ import {
 interface DashboardProps {
   onViewChange?: (view: AppView, mode?: string, prompt?: string) => void;
   user: UserProfile | null;
+  levelTitle: string;
   onToggleTheme?: () => void;
   currentTheme?: string;
 }
 
-const Dashboard: React.FC<DashboardProps> = ({ onViewChange, user, onToggleTheme, currentTheme }) => {
+const Dashboard: React.FC<DashboardProps> = ({ onViewChange, user, levelTitle, onToggleTheme, currentTheme }) => {
   const awakening = user?.awakening || { level: 1, xp: 0, nextLevelXp: 200, daysPresent: 1, currentStreak: 1 };
   const xpPercentage = (awakening.xp / awakening.nextLevelXp) * 100;
 
@@ -55,8 +57,8 @@ const Dashboard: React.FC<DashboardProps> = ({ onViewChange, user, onToggleTheme
              <div className="flex-1 w-full space-y-4">
                 <div className="flex justify-between items-end">
                    <div>
-                      <p className="text-[10px] font-black uppercase text-sub">Progress</p>
-                      <h2 className="text-2xl font-bold">Level {awakening.level} Seeker</h2>
+                      <p className="text-[10px] font-black uppercase text-sub">Infinite Progression</p>
+                      <h2 className="text-2xl font-bold">Level {awakening.level} {levelTitle}</h2>
                    </div>
                    <p className="text-xs font-bold text-sub">{awakening.xp} / {awakening.nextLevelXp} XP</p>
                 </div>

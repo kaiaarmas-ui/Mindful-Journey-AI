@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { motion } from 'framer-motion';
 import { ArrowLeft, Crown, Shield, Brain, ArrowRight, Stars, Atom, Zap, Globe, Sparkles, ShieldCheck, Heart, Gift } from 'lucide-react';
@@ -22,7 +23,7 @@ const IntegrationView: React.FC<{ onBack: () => void, onViewChange: (v: AppView,
 
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8 max-w-6xl mx-auto">
           <LevelCard title="Seeker" desc="Start your journey with basic breathing and chat." icon={ShieldCheck} onSelect={() => onViewChange('dashboard', undefined, undefined, 'seeker')} />
-          <LevelCard title="Architect" desc="Design your day with art journals and more." icon={Crown} onSelect={() => onViewChange('dashboard', undefined, undefined, 'architect')} highlight />
+          <LevelCard title="Creator" desc="Design your day with art journals and more." icon={Crown} onSelect={() => onViewChange('dashboard', undefined, undefined, 'creator')} highlight />
           <LevelCard title="Master" desc="Deep thinking and cinematic video tools." icon={Brain} onSelect={() => onViewChange('dashboard', undefined, undefined, 'zen-master')} />
         </div>
 

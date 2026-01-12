@@ -19,7 +19,8 @@ import {
   Palette,
   LayoutGrid,
   ZapOff,
-  Database
+  Database,
+  Library
 } from 'lucide-react';
 
 interface SidebarProps {
@@ -64,6 +65,7 @@ const Sidebar: React.FC<SidebarProps> = ({ currentView, onViewChange, user, onLo
           <NavItem id="chat" label="AI Chat" icon={Brain} active={currentView === 'chat'} />
           <NavItem id="image" label="AI Art" icon={Palette} active={currentView === 'image'} />
           <NavItem id="journal" label="Journal" icon={Feather} active={currentView === 'journal'} />
+          <NavItem id="journal-library" label="Library" icon={Library} active={currentView === 'journal-library'} />
           <NavItem id="quick-relief" label="Relax" icon={Zap} active={currentView === 'quick-relief'} />
           <NavItem id="the-void" label="The Void" icon={ZapOff} active={currentView === 'the-void'} />
           
@@ -125,6 +127,7 @@ const Sidebar: React.FC<SidebarProps> = ({ currentView, onViewChange, user, onLo
             </div>
             <nav className="space-y-4">
               <NavItem id="dashboard" label="Home" icon={Home} active={currentView === 'dashboard'} />
+              <NavItem id="journal-library" label="Library" icon={Library} active={currentView === 'journal-library'} />
               <NavItem id="the-void" label="The Void" icon={ZapOff} active={currentView === 'the-void'} />
               <NavItem id="my-data" label="My Data" icon={Database} active={currentView === 'my-data'} />
               <NavItem id="settings" label="Settings" icon={Settings} active={currentView === 'settings'} />

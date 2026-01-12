@@ -22,7 +22,6 @@ const AuthView: React.FC<AuthViewProps> = ({ onBack, onAuthSuccess }) => {
     setIsLoading(true);
     
     setTimeout(() => {
-      // Pull existing data if it exists for login to maintain current stats
       const savedData = JSON.parse(localStorage.getItem('mindful_user') || '{}');
       
       const user: UserProfile = {
@@ -30,7 +29,6 @@ const AuthView: React.FC<AuthViewProps> = ({ onBack, onAuthSuccess }) => {
         email,
         joinedDate: isLogin ? (savedData.joinedDate || Date.now()) : Date.now(),
         tier: isLogin ? (savedData.tier || 'zen-master') : tier,
-        // Provided missing required awakening property to satisfy UserProfile type
         awakening: isLogin && savedData.awakening ? savedData.awakening : {
           level: 1,
           xp: 0,
@@ -91,7 +89,7 @@ const AuthView: React.FC<AuthViewProps> = ({ onBack, onAuthSuccess }) => {
                 <div className="space-y-2">
                   <label className="text-[10px] font-bold text-slate-500 uppercase tracking-widest px-4">Starting Dimension</label>
                   <div className="grid grid-cols-3 gap-2">
-                    <TierSelectBtn active={tier === 'architect'} onClick={() => setTier('architect')} icon={Crown} label="Manifest" color="text-indigo-400" />
+                    <TierSelectBtn active={tier === 'creator'} onClick={() => setTier('creator')} icon={Crown} label="Manifest" color="text-indigo-400" />
                     <TierSelectBtn active={tier === 'zen-master'} onClick={() => setTier('zen-master')} icon={Brain} label="Transcend" color="text-purple-400" />
                     <TierSelectBtn active={tier === 'universal'} onClick={() => setTier('universal')} icon={Stars} label="Infinity" color="text-sky-400" />
                   </div>

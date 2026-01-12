@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, useCallback } from 'react';
 import Sidebar from './components/Sidebar.tsx';
 import Dashboard from './components/Dashboard.tsx';
@@ -30,6 +31,21 @@ import { AppView, UserProfile, MembershipTier } from './types.ts';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const XP_PER_LEVEL = 200;
+
+const LEVEL_TITLES = [
+  "Seeker", "Wanderer", "Observer", "Listener", "Breather", 
+  "Quiet Mind", "Calm Heart", "Peace Walker", "Cloud Watcher", "River Flow", 
+  "Rooted Soul", "Leaf in Wind", "Mountain Peak", "Deep Diver", "Void Walker", 
+  "Star Gazer", "Cosmic Breath", "Eternal Moment", "Infinite Presence", "Zen Master",
+  "Soul Architect", "Thought Weaver", "Harmony Pilot", "Light Bearer", "Silence Keeper"
+];
+
+const getLevelTitle = (level: number) => {
+  const index = (level - 1) % LEVEL_TITLES.length;
+  const loopCount = Math.floor((level - 1) / LEVEL_TITLES.length);
+  const title = LEVEL_TITLES[index];
+  return loopCount > 0 ? `${title} ${"I".repeat(loopCount + 1)}` : title;
+};
 
 const App: React.FC = () => {
   const [currentView, setCurrentView] = useState<AppView | 'landing'>(() => {
@@ -101,7 +117,7 @@ const App: React.FC = () => {
   const renderView = () => {
     switch (currentView) {
       case 'landing': return <LandingView onJoin={() => handleViewChange('auth')} onExplore={() => handleViewChange('dashboard')} onToggleTheme={handleThemeToggle} currentTheme={theme} onViewChange={handleViewChange} />;
-      case 'dashboard': return <Dashboard user={user} onViewChange={handleViewChange} onToggleTheme={handleThemeToggle} currentTheme={theme} />;
+      case 'dashboard': return <Dashboard user={user} levelTitle={user ? getLevelTitle(user.awakening.level) : "Seeker"} onViewChange={handleViewChange} onToggleTheme={handleThemeToggle} currentTheme={theme} />;
       case 'chat': return <ChatView onBack={handleBack} isMember={!!user} userTier={user?.tier} initialMode={viewParam} />;
       case 'image': return <ImageView onBack={handleBack} />;
       case 'video': return <VideoView onBack={handleBack} />;
@@ -127,7 +143,7 @@ const App: React.FC = () => {
       case 'support': return <SupportView onBack={handleBack} />;
       case 'settings': return <SettingsView onClose={handleBack} onThemeChange={(t) => { setTheme(t); localStorage.setItem('theme_pref', t); }} currentTheme={theme} />;
       case 'auth': return <AuthView onBack={handleBack} onAuthSuccess={(u) => { setUser(u); setCurrentView('dashboard'); }} />;
-      default: return <Dashboard user={user} onViewChange={handleViewChange} onToggleTheme={handleThemeToggle} currentTheme={theme} />;
+      default: return <Dashboard user={user} levelTitle={user ? getLevelTitle(user.awakening.level) : "Seeker"} onViewChange={handleViewChange} onToggleTheme={handleThemeToggle} currentTheme={theme} />;
     }
   };
 

@@ -78,7 +78,7 @@ const VisionView: React.FC<VisionViewProps> = ({ onBack, onViewChange }) => {
           >
             <h1 className="text-5xl md:text-7xl font-extrabold text-white tracking-tighter leading-[0.95]">
               Our Vision: <br />
-              <span className="text-indigo-500 font-serif italic">The Architecture of Presence</span>
+              <span className="text-indigo-500 font-serif italic">The Creation of Presence</span>
             </h1>
             <p className="text-2xl md:text-3xl text-slate-200 font-light max-w-4xl mx-auto leading-relaxed">
               We are engineering a future where the infinite power of AI is finally calibrated to the stillness of the human mind.
@@ -90,7 +90,7 @@ const VisionView: React.FC<VisionViewProps> = ({ onBack, onViewChange }) => {
           </motion.div>
         </header>
 
-        {/* The Challenge: The Fragmented Mind */}
+        {/* The Challenge */}
         <section className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
           <motion.div 
             custom={1}
@@ -136,7 +136,7 @@ const VisionView: React.FC<VisionViewProps> = ({ onBack, onViewChange }) => {
         <section className="space-y-16">
           <div className="text-center space-y-4">
             <h2 className="text-3xl md:text-5xl font-bold text-white tracking-tight">The Three Core Convictions</h2>
-            <p className="text-slate-500 max-w-xl mx-auto tracking-tight font-light">The foundational philosophy of our neural architecture.</p>
+            <p className="text-slate-500 max-w-xl mx-auto tracking-tight font-light">The foundational philosophy of our neural design.</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">

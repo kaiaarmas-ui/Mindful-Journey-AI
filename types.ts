@@ -1,6 +1,7 @@
+
 export type AppView = 'landing' | 'dashboard' | 'chat' | 'image' | 'video' | 'live' | 'quick-relief' | 'recommendations' | 'favorites' | 'daily-inspiration' | 'settings' | 'reminders' | 'my-data' | 'journal' | 'about' | 'vision' | 'auth' | 'journal-library' | 'marketing-toolkit' | 'privacy' | 'terms' | 'support' | 'integration' | 'the-void' | 'collective-soul' | 'music' | 'poetry' | 'story';
 
-export type MembershipTier = 'seeker' | 'architect' | 'zen-master' | 'eternal' | 'universal';
+export type MembershipTier = 'seeker' | 'creator' | 'zen-master' | 'eternal' | 'universal';
 
 export interface AwakeningStats {
   level: number;

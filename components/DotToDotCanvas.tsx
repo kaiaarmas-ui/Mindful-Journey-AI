@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Sparkles, RotateCcw, CheckCircle2 } from 'lucide-react';
@@ -23,12 +22,43 @@ const PATTERNS: Record<string, Point[]> = {
     { x: 10, y: 80 }, { x: 30, y: 40 }, { x: 40, y: 55 }, { x: 55, y: 20 }, 
     { x: 70, y: 50 }, { x: 80, y: 35 }, { x: 95, y: 80 }, { x: 10, y: 80 }
   ],
-  'Tree': [
-    { x: 45, y: 90 }, { x: 55, y: 90 }, { x: 55, y: 70 }, { x: 75, y: 75 }, 
-    { x: 85, y: 60 }, { x: 70, y: 50 }, { x: 90, y: 40 }, { x: 75, y: 25 }, 
-    { x: 60, y: 35 }, { x: 50, y: 10 }, { x: 40, y: 35 }, { x: 25, y: 25 }, 
-    { x: 10, y: 40 }, { x: 30, y: 50 }, { x: 15, y: 60 }, { x: 25, y: 75 }, 
-    { x: 45, y: 70 }, { x: 45, y: 90 }
+  'Butterfly': [
+    { x: 50, y: 80 }, { x: 30, y: 90 }, { x: 10, y: 70 }, { x: 10, y: 30 }, 
+    { x: 40, y: 10 }, { x: 50, y: 40 }, { x: 60, y: 10 }, { x: 90, y: 30 }, 
+    { x: 90, y: 70 }, { x: 70, y: 90 }, { x: 50, y: 80 }
+  ],
+  'Diamond': [
+    { x: 50, y: 10 }, { x: 90, y: 50 }, { x: 50, y: 90 }, { x: 10, y: 50 }, { x: 50, y: 10 }
+  ],
+  'Sun': [
+    { x: 50, y: 30 }, { x: 65, y: 35 }, { x: 70, y: 50 }, { x: 65, y: 65 }, 
+    { x: 50, y: 70 }, { x: 35, y: 65 }, { x: 30, y: 50 }, { x: 35, y: 35 }, 
+    { x: 50, y: 30 }, { x: 50, y: 10 }, { x: 50, y: 30 }, { x: 80, y: 20 }, 
+    { x: 65, y: 35 }, { x: 90, y: 50 }, { x: 70, y: 50 }, { x: 80, y: 80 },
+    { x: 65, y: 65 }, { x: 50, y: 90 }, { x: 50, y: 70 }, { x: 20, y: 80 },
+    { x: 35, y: 65 }, { x: 10, y: 50 }, { x: 30, y: 50 }, { x: 20, y: 20 },
+    { x: 35, y: 35 }
+  ],
+  'Spiral': [
+    { x: 50, y: 50 }, { x: 60, y: 50 }, { x: 60, y: 40 }, { x: 40, y: 40 },
+    { x: 40, y: 60 }, { x: 70, y: 60 }, { x: 70, y: 30 }, { x: 30, y: 30 },
+    { x: 30, y: 70 }, { x: 80, y: 70 }, { x: 80, y: 20 }, { x: 20, y: 20 },
+    { x: 20, y: 80 }, { x: 90, y: 80 }
+  ],
+  'Moon': [
+    { x: 50, y: 10 }, { x: 65, y: 15 }, { x: 75, y: 30 }, { x: 80, y: 50 },
+    { x: 75, y: 70 }, { x: 65, y: 85 }, { x: 50, y: 90 }, { x: 45, y: 75 },
+    { x: 42, y: 50 }, { x: 45, y: 25 }, { x: 50, y: 10 }
+  ],
+  'Heart': [
+    { x: 50, y: 30 }, { x: 60, y: 15 }, { x: 80, y: 15 }, { x: 90, y: 30 },
+    { x: 90, y: 50 }, { x: 50, y: 90 }, { x: 10, y: 50 }, { x: 10, y: 30 },
+    { x: 20, y: 15 }, { x: 40, y: 15 }, { x: 50, y: 30 }
+  ],
+  'Bird': [
+    { x: 20, y: 50 }, { x: 35, y: 35 }, { x: 50, y: 45 }, { x: 65, y: 35 },
+    { x: 80, y: 50 }, { x: 65, y: 55 }, { x: 50, y: 65 }, { x: 35, y: 55 },
+    { x: 20, y: 50 }
   ]
 };
 
@@ -36,7 +66,6 @@ const DotToDotCanvas: React.FC<DotToDotCanvasProps> = ({ patternType, onComplete
   const [points, setPoints] = useState<Point[]>([]);
   const [nextIdx, setNextIdx] = useState(0);
   const [isFinished, setIsFinished] = useState(false);
-  const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const rawPattern = PATTERNS[patternType] || PATTERNS['Mountain'];
@@ -63,12 +92,10 @@ const DotToDotCanvas: React.FC<DotToDotCanvasProps> = ({ patternType, onComplete
 
   return (
     <div className="relative w-full aspect-square max-w-2xl mx-auto bg-slate-950/40 rounded-[60px] border border-slate-800/60 overflow-hidden shadow-2xl group">
-      {/* Background Grid Accent */}
       <div className="absolute inset-0 opacity-[0.03] pointer-events-none" 
            style={{ backgroundImage: 'radial-gradient(circle, #6366f1 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
 
       <svg viewBox="0 0 100 100" className="w-full h-full relative z-10 p-12">
-        {/* Connection Lines */}
         {nextIdx > 0 && (
           <polyline
             points={points.slice(0, nextIdx).map(p => `${p.x},${p.y}`).join(' ')}
@@ -81,7 +108,6 @@ const DotToDotCanvas: React.FC<DotToDotCanvasProps> = ({ patternType, onComplete
           />
         )}
         
-        {/* The Pattern Nodes */}
         {points.map((p, i) => {
           const isConnected = i < nextIdx;
           const isNext = i === nextIdx;
@@ -118,7 +144,6 @@ const DotToDotCanvas: React.FC<DotToDotCanvasProps> = ({ patternType, onComplete
           );
         })}
 
-        {/* Finished Illustration Glow */}
         <AnimatePresence>
           {isFinished && (
             <motion.polyline
@@ -136,7 +161,6 @@ const DotToDotCanvas: React.FC<DotToDotCanvasProps> = ({ patternType, onComplete
         </AnimatePresence>
       </svg>
 
-      {/* Interface Overlay */}
       <div className="absolute bottom-8 left-0 right-0 flex justify-center gap-4 z-20">
         <button 
           onClick={handleReset}
